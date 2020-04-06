@@ -1,4 +1,22 @@
+require "fileutils"
+
 class Post
+
+# Статичний метод, який повертає варіанти записів
+
+def self.post_Types()
+
+	return [Memo, Link, Task]
+
+end
+
+# Статичний метод, який створює екземпляр відповідного дочірнього класу
+
+def self.create (type_index)
+
+	return post_Types[type_index].new
+
+end
 
 # Конструктор
 
@@ -39,8 +57,11 @@ end
 
 def get_File_Path()
 
-	current_path = File.getdir(__FILE__)
-	file_name = @created_at.strftime("#{self.class.name}_%Y-%m-%d_%H-%M-%S.txt")
+	current_path = File.dirname(__FILE__) + "/notes"
+
+	FileUtils.mkdir_p current_path
+
+	file_name = @created_at.strftime("#{self.class.name}_%d-%m-%Y_%H-%M-%S.txt")
 
 	return current_path + "/" + file_name
 
