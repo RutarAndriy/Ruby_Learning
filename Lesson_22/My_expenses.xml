@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Коментар -->
+
+<expenses>
+
+	<!-- Тег без вмісту -->
+	<test />
+
+	<!-- Тег з вмістом -->
+	<test > Some Text </test>
+
+	<!-- Тег без вмісту з атрибутом -->
+	<test attr="test_attr"/>
+
+	<!-- Список витрат -->
+
+	<expense date="07.05.2020" amount="107.35" >
+		Продукти харчування
+	</expense>
+
+	<expense date="07.05.2020" amount="37.50" >
+		Книга "Гаррі Поттер і таємна кімната"
+	</expense>
+
+	<expense date="12.05.2020" amount="96.75" >
+		Інгридієнти на торт "Мрія"
+	</expense>
+
+	<expense date="16.05.2020" amount="186.15" >
+		Продукти харчування
+	</expense>
+
+	<expense date="23.05.2020" amount="92.05" >
+		Продукти харчування
+	</expense>
+
+	<expense date="29.05.2020" amount="13.20" >
+		Ліки від кашлю "Амброксол"
+	</expense>
+
+	<expense date="03.06.2020" amount="137.95" >
+		Продукти харчування
+	</expense>
+
+	<expense date="09.06.2020" amount="169.15" >
+		Інгридієнти на піцу
+	</expense>
+
+</expenses>
