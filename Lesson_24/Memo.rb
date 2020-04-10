@@ -28,6 +28,22 @@ def read_From_Console()
 
 end
 
+# Метод повертає дані класу у вигляді хешу
+
+def to_DB_Hash
+
+	return super.merge(
+
+		{
+
+			"text" => @text.join('\n')
+
+		}
+
+	)
+
+end
+
 # Кінець класу <Memo>
 
 end

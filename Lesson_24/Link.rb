@@ -31,6 +31,23 @@ def read_From_Console()
 
 end
 
+# Метод повертає дані класу у вигляді хешу
+
+def to_DB_Hash
+
+	return super.merge(
+
+		{
+
+			"text" => @text,
+			"url" => @url
+
+		}
+
+	)
+
+end
+
 # Кінець класу <Link>
 
 end
