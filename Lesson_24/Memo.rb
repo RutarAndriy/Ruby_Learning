@@ -44,6 +44,16 @@ def to_DB_Hash
 
 end
 
+# Завантажуємо свої поля з хеш-масиву
+
+def load_Data (data_hash)
+
+	super(data_hash) # Викликаємо батьківський метод
+
+	@text = data_hash['text'].split('\n')
+
+end
+
 # Кінець класу <Memo>
 
 end
