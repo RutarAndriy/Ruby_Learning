@@ -7,13 +7,12 @@ class Post
 
 @@SQLITE_DB_FILE = File.dirname(__FILE__) + "/data/notepad.sqlite3"
 
-# Статичний метод, який повертає варіанти записів
+# Конструктор
 
-def self.post_Types()
+def initialize()
 
-	return { "Memo" => Memo,
-			 "Link" => Link,
-			 "Task" => Task }
+	@text = nil
+	@created_at = Time.now
 
 end
 
@@ -25,12 +24,13 @@ def self.create (type)
 
 end
 
-# Конструктор
+# Статичний метод, який повертає варіанти записів
 
-def initialize()
+def self.post_Types()
 
-	@text = nil
-	@created_at = Time.now
+	return { "Memo" => Memo,
+			 "Link" => Link,
+			 "Task" => Task }
 
 end
 
@@ -46,31 +46,83 @@ def read_From_Console()
 	#todo
 end
 
-# Записати дані у файл
+# Пошук записів у базі даних
 
-def write_File()
+def self.find_Data (limit, type, id)
 
-	file = File.new(get_File_Path, "w:UTF-8")
+	db = SQLite3::Database.open(@@SQLITE_DB_FILE)
 
-	for line in to_String() do
-		file.puts(line)
+	# Відображаємо дані по ідентифікатору
+	if id != nil
+
+		# Отримувати результати у вигляді хешів
+		db.results_as_hash = true
+
+		# Виконуємо запит, отримуємо масив результатів
+		result = db.execute("SELECT * FROM posts WHERE rowid = ?", id)
+
+		# Результат - перший елемент (якщо повернувся масив)
+		result = result[0] if result.is_a? Array
+
+		# Закриваємо базу даних
+		db.close
+
+		# Якщо результат порожній - запис не знайдено
+		if result == nil
+
+			puts "Запис із даним id (#{id}) відсутній у базі даних"
+    		exit
+
+		# Якщо результат не порожній - запис знайдено
+		else
+
+    		# Створюємо екземпляр класу <Post> заданого типу
+    		post = create(result['type'])
+
+    		# Заповнюємо екземпляр класу даними
+    		post.load_Data(result)
+
+    		# Повертаємо результат
+    		return post
+
+		end
+
+	# Відображаємо дані у вигляді таблиці
+	else
+
+		# Заборонити отримувати результати у вигляді хешів
+  		db.results_as_hash = false
+
+		# Формуємо запит до бази даних із необхідними умовами
+		query = "SELECT rowid, * FROM posts "
+
+		# Якщо заданий тип, необхідно додати дану умову
+		query += "WHERE type = :type " unless type.nil?
+
+		# Сортування записів по id - спочатку будуть відображатися найновіші
+		query += "ORDER by rowid DESC "
+
+		# Якщо заданий ліміт, необхідно додати дану умову
+		query += "LIMIT :limit " unless limit.nil?
+
+  		# Готуємо запит до бази даних
+  		statement = db.prepare query
+
+  		# Вставляємо значення параметрів, якщо вони є
+  		statement.bind_param('type', type) unless type.nil?
+  		statement.bind_param('limit', limit) unless limit.nil?
+
+  		# Виконуємо запит, отримуємо результат
+		result = statement.execute!
+
+		# Закриваємо запит і базу даних
+		statement.close
+		db.close
+
+		# Повертаємо результат
+		return result
+
 	end
-
-	file.close()
-
-end
-
-# Отримати шлях до файлу
-
-def get_File_Path()
-
-	current_path = File.dirname(__FILE__) + "/notes"
-
-	FileUtils.mkdir_p current_path
-
-	file_name = @created_at.strftime("#{self.class.name}_%d-%m-%Y_%H-%M-%S.txt")
-
-	return current_path + "/" + file_name
 
 end
 
@@ -107,9 +159,18 @@ def to_DB_Hash
 	return {
 
 		"type" => self.class.name,
-		"created_at" => @created_at.to_s
+		"created_at" => @created_at.strftime("%Y-%m-%d %H:%M:%S")
 
 	}
+
+end
+
+# Завантажуємо свої поля з хеш-масиву
+
+def load_Data (data_hash)
+
+	@created_at = Time.parse(data_hash['created_at'])
+	@text = data_hash['text']
 
 end
 
