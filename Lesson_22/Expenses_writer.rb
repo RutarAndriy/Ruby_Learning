@@ -1,7 +1,7 @@
 require 'date'
 require 'rexml/document'
 
-file_name = File.dirname(__FILE__) + '/My_expenses.xml'
+file_name = File.dirname(__FILE__) + '/my_expenses.xml'
 
 # unless true == if false
 # Якщо файл не знайдено - завершуємо програму
@@ -11,7 +11,6 @@ unless File.exist?(file_name)
 end
 
 # Відкриваємо новий файл
-
 file = File.new(file_name)
 
 # Зчитуємо вміст файлу за допомогою бібліотеки rexml
@@ -23,7 +22,6 @@ rescue
 end
 
 # Закриваємо файл
-
 file.close
 
 # Запитуємо дані у користувача
@@ -55,8 +53,7 @@ else
 	end
 end
 
-# Знайдемо кореневий елемент xml
-
+# Знаходимо кореневий елемент xml
 expenses = doc.elements.find("expenses").first
 
 # Додамо новий тег із атрибутами
@@ -69,17 +66,13 @@ attributes = {
 expense = expenses.add_element("expense", attributes)
 
 # Задаємо вміст (текст) тегу
-
 expense.text = expense_text
 
 # Перезаписуємо файл
 
 file = File.new(file_name, "w:UTF-8")
-
 doc.write(file, 2)
-
 file.close
 
 # Виводимо інформаційне повідомлення
-
 puts "Інформвція успішно збережена"
