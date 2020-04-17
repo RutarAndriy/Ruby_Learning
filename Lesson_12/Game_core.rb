@@ -73,9 +73,10 @@ def check_Letter (letter)
 end
 
 # Методи для отримання внутрішніх перемінних класу
+# Якщо в методі лише одна перемінна, то це рівноцінно команді return
 
 def mystery_word
-	@mystery_word # аналог коду: return @mystery_word
+	@mystery_word
 end
 
 def errors_count
