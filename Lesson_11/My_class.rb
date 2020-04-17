@@ -22,4 +22,6 @@ def is_My_Method_Use?
 	return @method_use
 end
 
+# Кінець класу <My_class>
+
 end
