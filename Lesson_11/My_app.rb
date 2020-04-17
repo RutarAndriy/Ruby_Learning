@@ -1,14 +1,12 @@
 require "./My_class.rb"
 
 # Створення екземпляру нового класу
-
 my_class = My_class.new
 
 puts "Чи використовувався метод \"my_Method\" в програмі: " + 
      "#{my_class.is_My_Method_Use?}"
 
 # Виклик власного методу <my_Method>
-
 my_class.my_Method()
 
 puts "Чи використовувався метод \"my_Method\" в програмі: " + 
