@@ -1,10 +1,8 @@
 # Отримуємо шлях до запущеного файлу *.rb
-
 current_path = File.dirname(__FILE__)
 
 # Задаємо шлях до файлу, який необхідно прочитати
-
-file_path = "#{current_path}/text/Test_file.txt"
+file_path = "#{current_path}/text/test_file.txt"
 
 # Перевірка наявності файлу
 
