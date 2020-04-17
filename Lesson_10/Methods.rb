@@ -94,7 +94,7 @@ def get_User_Input()
 end
 
 # Метод перевіряє чи користувач вгадав літеру
-# Метод <qnic> повертає масив з елементами у якому немає повторень
+# Метод <uniq> повертає масив з елементами у якому немає повторень
 
 def check_Letter (letter, mystery_word, good_letters, bad_letters)
 
