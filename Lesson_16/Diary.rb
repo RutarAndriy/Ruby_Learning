@@ -23,7 +23,6 @@ end
 all_lines.pop
 
 # Отримання часу
-
 time = Time.new
 
 file_name = time.strftime("%Y-%m-%d")
@@ -32,11 +31,9 @@ time_string = time.strftime("%H:%M")
 separator = "-------------------------"
 
 # Відкривання файлу (або його створення) для дозаписування інформації
-
 file = File.new("#{current_path}/#{file_name}.txt", "a:UTF-8")
 
 # Запис у фвйл строки
-
 file.print("\n\t#{time_string}\n\n")
 
 for item in all_lines do
