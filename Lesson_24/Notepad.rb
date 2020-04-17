@@ -30,7 +30,6 @@ end
 puts "\n"
 
 # Створення екземпляру відповідного класу
-
 entry = Post.create(choices[choice])
 
 # Читання та запис даних

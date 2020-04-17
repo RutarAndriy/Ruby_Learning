@@ -33,7 +33,6 @@ OptionParser.new do |option|
 end.parse!
 
 # Отримуємо результат пошуку за запитом
-
 result = Post.find_Data(options[:limit], options[:type], options[:id])
 
 # Відображаємо конкретний запис
