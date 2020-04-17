@@ -75,7 +75,7 @@ end
 # Методи для отримання внутрішніх перемінних класу
 
 def mystery_word
-	@mystery_word # аналог коду: return @mystery_word
+	@mystery_word
 end
 
 def errors_count
