@@ -2,11 +2,9 @@ require 'json'
 require 'date'
 
 # Читаємо вміст файлу <signs.json>
-
 file = File.read("#{__dir__}/data/signs.json", encoding: 'utf-8')
 
 # Парсимо файл
-
 signs = JSON.parse(file)
 
 # Запитуємо у користувача дату народження
@@ -15,7 +13,6 @@ puts "Введіть дату вашого народження (у формат
 user_date_string = STDIN.gets.chomp
 
 # Створюємо об'єкт класу <Date>
-
 user_date = Date.parse(user_date_string + '.2000')
 
 # Об'являємо необхідні перемінні
@@ -57,7 +54,6 @@ puts "За знаком зодіаку ви #{user_sign['text']} (#{user_sign['d
 puts "\n"
 
 # Зчитуємо построчно файл, який містить "зображення" знаку зодіаку
-
 image_lines = File.readlines(user_image)
 
 # Виводимо зображення із боковим відступом
