@@ -1,7 +1,7 @@
 require 'date'
 require 'rexml/document'
 
-file_name = File.dirname(__FILE__) + '/My_expenses.xml'
+file_name = File.dirname(__FILE__) + '/my_expenses.xml'
 
 # unless true == if false
 # Якщо файл не знайдено - завершуємо програму
@@ -11,19 +11,15 @@ unless File.exist?(file_name)
 end
 
 # Відкриваємо новий файл
-
 file = File.new(file_name)
 
 # Зчитуємо вміст файлу за допомогою бібліотеки rexml
-
 doc = REXML::Document.new(file)
 
 # Закриваємо файл
-
 file.close
 
 # Хеш, який містить список днів та суми грошей, потрачених у конкретний день
-
 amount_by_day = {}
 
 # Отримуємо із документу всі теги <expense> і в циклі проходимося по них
@@ -46,7 +42,6 @@ doc.elements.each('expenses/expense') do |item|
 end
 
 # Хеш витрат по місяцях
-
 sum_by_month = {}
 
 # Проходимося в циклі по усіх записах
@@ -60,7 +55,6 @@ amount_by_day.keys.sort.each do |key|
 end
 
 # Перший місяць у посортованому масиві даних
-
 current_month = amount_by_day.keys.sort[0].strftime("%B %Y")
 
 # Виводимо результат для першого місяця
