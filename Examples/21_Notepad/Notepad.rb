@@ -1,5 +1,4 @@
 require_relative "Post.rb"
-
 require_relative "Memo.rb"
 require_relative "Link.rb"
 require_relative "Task.rb"
